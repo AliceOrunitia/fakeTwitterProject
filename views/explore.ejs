@@ -1,0 +1,67 @@
+<%- include("partials/header.ejs")%>
+    <%- include("partials/navbar.ejs")%>
+        <%- include("partials/sidebar.ejs")%>
+            <div class="column is-8">
+                <ul>
+                    <%for(let u of users){%>
+                        <li><a href="/breeta/users/<%=u.userAcc%>">
+                                <div class="container">
+                                    <div class="card">
+                                        <div class="columns">
+                                            <div class="column is-1">
+                                                <div class="card-image">
+                                                    <figure class="image is-128x128">
+                                                        <img src="<%=u.pfp%>" alt="Placeholder image">
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            <div class="column is-8">
+
+                                                <div class="card-content">
+                                                    <div class="media">
+
+                                                        <div class="media-content">
+                                                            <p class="title is-4">
+                                                                <%=u.username%>
+                                                            </p>
+                                                            <p class="subtitle is-6">
+                                                                @<%=u.userAcc%>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="content">
+                                                        <%=u.userBio%>
+                                                            <br>
+                                                            <p>Member since: <%=u.memberSince%>
+                                                            </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="column is-2">
+                                            <div class="media is-right">
+                                                <%if(currUser===u){%>
+
+                                                    <% }else if(currUser.following.find((e)=> e.id === u.id)){%>
+                                                        <a
+                                                            href="/breeta/unfollow?followAcc=<%=u.userAcc%>&currAcc=<%=currUser.userAcc%>">
+                                                            <button
+                                                                class="button is-danger is-outlined">Unfollow</button></a>
+                                                        <%} else {%>
+                                                            <a
+                                                                href="/breeta/follow?followAcc=<%=u.userAcc%>&currAcc=<%=currUser.userAcc%>">
+                                                                <button
+                                                                    class="button is-success is-outlined">Follow</button></a>
+                                                            <%}%>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </a></li>
+                        <%}%>
+                </ul>
+            </div>
+
+
+
+
+            <%- include("partials/footer.ejs")%>

@@ -1,0 +1,75 @@
+<%- include("partials/header.ejs")%>
+    <%- include("partials/navbar.ejs")%>
+        <%- include("partials/sidebar.ejs")%>
+            <div class="column is-8" id="breetList">
+                <div>
+                    <a href="/breeta/<%=breet.id%>" class="link">
+                        <article class="media" id="breetCard">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                    <img src="<%=breet.pfp%>">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>
+                                            <%=breet.username%>
+                                        </strong> <small>
+                                            <a href="/breeta/users/<%=breet.userAcc%>" class="link">
+                                                @<%=breet.userAcc%>
+                                            </a>
+                                        </small> <small>
+                                            <%=functions.timeCall(breet.postDate)%>
+
+                                        </small>
+                                        <br>
+                                        <a href="/breeta/show/<%=breet.id%>" class="link">
+                                            <%=breet.breetText%>
+                                        </a>
+                    </a>
+                    </p>
+                </div>
+            </div>
+            <%if(breet.userAcc===currUser.userAcc){%>
+                <div class="media">
+                    <form method="get" action="/breeta/<%=breet.id%>/edit">
+                        <button class="button"><span class="icon"><i class="fa-solid fa-pencil"></i></span></button>
+                    </form>
+                    <div class="media-right">
+                        <form method="POST" action="/breeta/<%= breet.id %>/?_method=DELETE">
+                            <button class="button"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                    <%}%>
+                        <% if(breet.image){%>
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                    <img src="<%=breet.image%>" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <%}%>
+                                </article>
+                                <nav class="level is-mobile">
+                                    <div class="level">
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                        </a>
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                                        </a>
+                                        <a class="level-item">
+                                            <span class="icon is-small">
+                                                <a
+                                                    href="/breeta/like?likorAcc=<%=currUser.userAcc%>&likeeAcc=<%=breet.userAcc%>&breetID=<%=breet.id%>"><i
+                                                        class="fas fa-heart<%if(breet.likes.find(e => e === currUser.userAcc)){%> has-text-danger<%}%>"></i>
+                                                    <%if(breet.likesCount> 0){%><%=breet.likesCount%>
+                                                            <%}%>
+                                                </a></span>
+                                        </a>
+                                        </a>
+                                    </div>
+                                </nav>
+                </div>
+                </div>
+                <%- include("partials/footer.ejs")%>
