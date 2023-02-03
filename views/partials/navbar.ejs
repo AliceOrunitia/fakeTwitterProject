@@ -1,0 +1,49 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/breeta">
+            <img id="menu-logo" src="https://i.postimg.cc/hjCSbCn8/brittaicon.png" alt="Logo">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary" href="/breeta/newUser">
+                        <strong>New User</strong>
+                    </a>
+                </div>
+            </div>
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="<%=currUser.pfp%>>">
+                    </figure>
+                </div>
+            </div>
+            <div class="select">
+                <form action="/breeta/selectUser" method="post">
+                    <select name="selectUsers" id="" onchange="this.form.submit()">
+                        <option value="" disabled selected>
+                            <%=currUser.userAcc%>
+                        </option>
+                        <% for(let u of users){%>
+                            <%if(u.userAcc !==currUser.userAcc){%>
+                                <option value="<%=u.userAcc%>">
+                                    <%=u.userAcc%>
+                                </option>
+                                <%}%>
+                                    <%}%>
+                    </select>
+                </form>
+            </div>
+
+        </div>
+</nav>
